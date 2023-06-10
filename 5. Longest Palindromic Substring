@@ -1,0 +1,23 @@
+def longestPalindrome(self, s: str) -> str:
+    # Check if the whole string is a palindrome
+    if s == s[::-1]:  
+        return s
+
+    # Initialize the longest palindrome
+    palindrome = ""  
+
+    # Iterate over possible substring lengths
+    for y in range(len(s)):  
+        try:
+            # Generate palindromic substrings of length y
+            listy = [s[i:i+y] for i in range(len(s)-y+1) if s[i:i+y] == s[i:i+y][::-1]]
+
+            # If there are palindromic substrings of length y  
+            if listy:  
+                # Check if listy[0] is a palindrome and longer than the current longest palindrome then update the longest palindrome
+                if listy[0] == listy[0][::-1] and len(listy[0]) > len(palindrome):  
+                    palindrome = listy[0]  
+        except IndexError:
+            pass
+    # Return the longest palindrome or the first character if no palindrome is found
+    return palindrome if palindrome else s[0]  
