@@ -1,0 +1,37 @@
+    def minFlips(self, a: int, b: int, c: int) -> int:
+        a_bin, b_bin, c_bin = [bin(x)[2:] for x in (a, b, c)]
+        
+        max_len = max(len(a_bin), len(b_bin), len(c_bin))
+        a_bin = '0' * (max_len - len(a_bin)) + a_bin
+        b_bin = '0' * (max_len - len(b_bin)) + b_bin
+        c_bin = '0' * (max_len - len(c_bin)) + c_bin
+
+        counter = 0
+        for i, x in enumerate(c_bin):
+            if int(x) == 1:
+                if x == a_bin[i] or x == b_bin[i]:
+                    pass
+                else:     
+                    counter += 1
+                    a_list = list(a_bin)
+                    a_list[i] = x
+                    if int(''.join(a_list)) != 0:
+                        a_bin = ''.join(a_list)
+                    else:
+                        b_list = list(b_bin)
+                        b_list[i] = x
+                        b_bin = ''.join(b_list)
+            else:
+                a_list = list(a_bin)
+                if int(a_list[i]) != 0:
+                    a_list[i] = x
+                    a_bin = ''.join(a_list)
+                    counter += 1
+                            
+                b_list = list(b_bin)
+                if int(b_list[i]) != 0:
+                    b_list[i] = x
+                    b_bin = ''.join(b_list)
+                    counter += 1
+
+        return counter

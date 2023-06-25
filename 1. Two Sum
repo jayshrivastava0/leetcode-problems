@@ -1,0 +1,8 @@
+def twoSum(self, nums: List[int], target: int) -> List[int]:
+    for x1, i in enumerate(nums):
+        for j in nums[x1 + 1:]:
+            if i + j == target:
+                if nums.index(i) != nums.index(j):
+                    return nums.index(i), nums.index(j)
+                else:
+                    return nums.index(i), nums[x1 + 1:].index(j) +x1+ 1

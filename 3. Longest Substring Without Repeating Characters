@@ -1,0 +1,26 @@
+  def lengthOfLongestSubstring(self, s: str) -> int:
+      substring = []
+      max_len = []
+      index = 0
+      position = 0
+      for x , i in enumerate(range(len(s) * 3)):
+          i = s[index]
+          if i not in substring:
+
+              if substring == []:
+                  position = index
+              index += 1
+              substring.append(i)
+
+          else:
+              if index != position + 1:
+                  index = s.index(i, position) + 1
+              else:
+                  index = s.index(i, index)
+              max_len.append(len(substring))
+              substring.append(i)
+              substring.clear()
+          if i == s[-1] and index == len(s):
+              break
+      max_len.append(len(substring))
+      return max(max_len)
